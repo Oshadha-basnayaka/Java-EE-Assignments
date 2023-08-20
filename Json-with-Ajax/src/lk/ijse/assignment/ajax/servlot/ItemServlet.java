@@ -11,7 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.*;
 
-@WebServlet (urlPatterns = ("/page/item"))
+
+@WebServlet(urlPatterns = "/pages/item")
 public class ItemServlet   extends HttpServlet {
 
 
