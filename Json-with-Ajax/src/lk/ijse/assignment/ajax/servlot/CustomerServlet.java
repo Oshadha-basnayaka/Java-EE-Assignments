@@ -34,7 +34,10 @@ public class CustomerServlet extends HttpServlet {
                 customerObject.add("name", name);
                 customerObject.add("address", address);
                 allCustomers.add(customerObject.build());
+
             }
+
+            resp.getWriter().print(allCustomers.build());
 
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
