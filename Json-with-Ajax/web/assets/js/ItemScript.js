@@ -7,8 +7,9 @@ $("#btnGetAllItems").click(function () {
 function getAllItems(){
     $("#tblItem").empty();
     $.ajax({
-        url: 'item',
+        url: "item",
         dataType:"json",
+        method: "get",
         success: function (items) {
             for (let i in items) {
                 console.log(items[i]);
@@ -32,7 +33,7 @@ function getAllItems(){
 $("#btnItem").click(function (){
     let formData=$("#itemForm").serialize();
     $.ajax({
-        url:"item?option=add",
+        url:"item",
         method:"post",
         data:formData,
         success:function (res){
@@ -50,8 +51,8 @@ $("#btnItem").click(function (){
 $("#btnItemDelete").click(function (){
     let formData=$("#itemForm").serialize();
     $.ajax({
-        url:"item?option=delete",
-        method:"post",
+        url:'item?id='+id,
+        method:'delete',
         data:formData,
         success:function (res){
             console.log(res);
@@ -65,16 +66,31 @@ $("#btnItemDelete").click(function (){
     });
 });
 
-$("#btnItemUpdate").click(function (){
-    let formData=$("#itemForm").serialize();
+
+
+$("#btnUpdate").click(function (){
+    //  let formData=$("#customerForm").serialize();
+
+    let id = $('#txtCustomerID').val();
+    let name = $('#txtCustomerName').val();
+    let address = $('#txtCustomerAddress').val();
+
+    let item={
+        "code" : id ,
+        "name" : name,
+        "address" :address
+    }
+
     $.ajax({
-        url:"item?option=update",
-        method:"post",
-        data:formData,
+        url:'item',
+        method:'put',
+        contentType: "application/json",
+        data:JSON.stringify(item),
+
         success:function (res){
             console.log(res);
             alert(res.message);
-            getAllItems();
+            getAllCustomers();
         },
         error:function (error){
             console.log(error.responseJSON);
